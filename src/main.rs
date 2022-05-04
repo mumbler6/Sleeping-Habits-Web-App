@@ -1,5 +1,7 @@
 use yew::prelude::*;
 use gloo::timers::callback::{Interval};
+use web_sys::*;
+
 
 enum Msg {
     UpdateTime,
@@ -15,6 +17,7 @@ struct CounterComponent {
     interval: Interval,
     check_interval: Interval,
     current_time: String,
+    alarm_audio: HtmlAudioElement,
 }
 
 fn get_current_time() -> String {
@@ -35,14 +38,18 @@ impl Component for CounterComponent {
             let link = _ctx.link().clone();
             Interval::new(1, move || link.send_message(Msg::CheckTime))
         };
+
         let sl = "I want to sleep at... ";
         let st = "hh:mm:ss AM/PM";
+        let result = web_sys::HtmlAudioElement::new_with_src("assets/heheha.mp3");
+        
         Self {
             sleep_time: st.to_string(),
             sleep_label: sl.to_string(),
             interval: clock_handle,
             check_interval: check_handle,
             current_time: get_current_time(),
+            alarm_audio: result.unwrap(),
         }
     }
 
@@ -67,6 +74,7 @@ impl Component for CounterComponent {
                 true
             }
             Msg::PlaySound => {
+                self.alarm_audio.play();
                 true
             }
         }
