@@ -43,7 +43,7 @@ impl Component for CounterComponent {
         let sl = "I want to sleep at... ";
         let st = "h:mm:ss AM/PM";
 
-        let main_alarm = web_sys::HtmlAudioElement::new_with_src("https://wiki.teamfortress.com/w/images/6/6c/Heavy_specialcompleted10.wav");
+        let main_alarm = web_sys::HtmlAudioElement::new_with_src("https://wiki.teamfortress.com/w/images/2/26/Heavy_yell15.wav");
 
         Self {
             sleep_time: st.to_string(),
