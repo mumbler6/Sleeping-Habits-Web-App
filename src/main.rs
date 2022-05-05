@@ -1,7 +1,7 @@
 use yew::prelude::*;
 use gloo::timers::callback::{Interval};
+use substring::Substring;
 use web_sys::*;
-
 
 enum Msg {
     UpdateTime,
@@ -9,6 +9,7 @@ enum Msg {
     Delete,
     CheckTime,
     PlaySound,
+    StopSound,
 }
 
 struct CounterComponent {
@@ -40,16 +41,17 @@ impl Component for CounterComponent {
         };
 
         let sl = "I want to sleep at... ";
-        let st = "hh:mm:ss AM/PM";
-        let result = web_sys::HtmlAudioElement::new_with_src("assets/heheha.mp3");
-        
+        let st = "h:mm:ss AM/PM";
+
+        let main_alarm = web_sys::HtmlAudioElement::new_with_src("https://wiki.teamfortress.com/w/images/6/6c/Heavy_specialcompleted10.wav");
+
         Self {
             sleep_time: st.to_string(),
             sleep_label: sl.to_string(),
             interval: clock_handle,
             check_interval: check_handle,
             current_time: get_current_time(),
-            alarm_audio: result.unwrap(),
+            alarm_audio: main_alarm.unwrap(),
         }
     }
 
@@ -74,7 +76,12 @@ impl Component for CounterComponent {
                 true
             }
             Msg::PlaySound => {
-                self.alarm_audio.play();
+                self.alarm_audio.set_loop(true);
+                self.alarm_audio.play().unwrap();
+                true
+            }
+            Msg::StopSound => {
+                self.alarm_audio.set_loop(false);
                 true
             }
         }
@@ -84,11 +91,16 @@ impl Component for CounterComponent {
     fn view(&self, ctx: &Context<Self>) -> Html {
         let link = ctx.link();
         html! {
+            <div>
             <div class="container">
                 <p> { self.current_time.clone() }</p>
                 <a> { self.sleep_label.clone() } </a>
                 <input type="text" value={self.sleep_time.clone()} oninput={link.callback(|e: InputEvent| Msg::InputValue(e.data().unwrap()))} />
                 <button onclick={link.callback(|_| Msg::Delete)}>{ '\u{232B}' }</button>
+            </div>
+            <div class="button">
+                <button onclick={link.callback(|_| Msg::StopSound)}>{ "Stop Alarm" }</button>
+            </div>
             </div>
         }
     }

@@ -9,7 +9,9 @@ edition = "2021"
 yew = "0.19.3"
 js-sys = "*"
 gloo = "0.7"
+log = "0.4.6"
+substring = "1.4.5"
 
 [dependencies.web-sys]
 version = "0.3"
-features = [ "HtmlAudioElement" ]
+features = [ "HtmlAudioElement"]
