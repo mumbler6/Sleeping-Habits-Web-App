@@ -10,7 +10,7 @@
 **Project Introduction**
 
 
-Being someone who has a pretty bad sleep schedule and almost always stays up too late, I wanted to make something that could adhere to my needs when I'm often on my computer late at night. I also wanted to learn more about developing web apps and other UI related projects. This project is a web app built on the Rust crates Yew and Rocket. It displays information and various notifications / reminders based on the time the user typically sleeps, giving options for users to get the amount of sleep they'll want. The app will hopefully be able to additionally perform operations to the user's needs such as dimming the screen's brightness or adding warmer colors to the display. 
+Being someone who has a pretty bad sleep schedule and almost always stays up too late, I wanted to make something that could adhere to my needs when I'm often on my computer late at night. I also wanted to learn more about developing web apps and other UI related projects. This project is a web app built on the Rust crate Yew. It displays information and notifies users when it is time for bed. The app will hopefully be able to additionally perform operations to the user's needs such as dimming the screen's brightness or adding warmer colors to the display. 
 
 **System Overview**
 
